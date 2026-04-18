@@ -26,7 +26,7 @@ public class VisualsStage {
     }
 
     public void run() throws Exception {
-        System.out.println("\n── Phase 3: VISUALS ─────────────────────────────");
+        System.out.println("\nVISUALS STAGE(^◕.◕^)");
 
         transcode();
         generateSprites();
@@ -61,7 +61,7 @@ public class VisualsStage {
                 try {
                     runFfmpeg(scale, vcodec, extraArgs, outPath);
                     long sizeKb = new File(outPath).length() / 1024;
-                    System.out.println("✓ (" + sizeKb + " KB)");
+                    System.out.println("(" + sizeKb + " KB)");
                     count++;
                 } catch (Exception e) {
                     System.out.println(" ffmpeg not found, creating stub file.");
@@ -77,7 +77,6 @@ public class VisualsStage {
     private void runFfmpeg(String scale, String vcodec, String extraArgs, String outPath)
             throws IOException, InterruptedException {
 
-        // Build command as a list to handle spaces correctly
         java.util.List<String> cmd = new java.util.ArrayList<>();
         cmd.add("ffmpeg");
         cmd.add("-y");
@@ -85,7 +84,6 @@ public class VisualsStage {
         cmd.add("-vf");      cmd.add("scale=" + scale);
         cmd.add("-vcodec");  cmd.add(vcodec);
 
-        // Split extra args (e.g. "-crf 23 -preset fast") and add individually
         for (String arg : extraArgs.split(" ")) {
             cmd.add(arg);
         }
@@ -96,7 +94,7 @@ public class VisualsStage {
         ProcessBuilder pb = new ProcessBuilder(cmd);
         pb.redirectErrorStream(true);
         Process process = pb.start();
-        // Drain output so process doesn't block
+
         process.getInputStream().transferTo(java.io.OutputStream.nullOutputStream());
         int exitCode = process.waitFor();
 
@@ -105,16 +103,11 @@ public class VisualsStage {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────
-    // 2. Sprite Generator — REAL (ffmpeg) with stub fallback
-    // ─────────────────────────────────────────────────────────────
-
     private void generateSprites() throws Exception {
         String imgDir   = outputDir + "/images";
         String thumbDir = imgDir + "/thumbnails";
         Files.createDirectories(Path.of(thumbDir));
 
-        // Individual thumbnails every 10 seconds
         System.out.print("  [Sprite Generator] Extracting thumbnails... ");
         try {
             String thumbPattern = thumbDir + "/thumb_%04d.jpg";
@@ -129,9 +122,9 @@ public class VisualsStage {
             p.waitFor();
 
             int count = new File(thumbDir).list().length;
-            System.out.println("✓ (" + count + " thumbnails)");
+            System.out.println("(" + count + " thumbnails)");
         } catch (Exception e) {
-            System.out.println("⚠️  ffmpeg not found, creating stub.");
+            System.out.println(" ffmpeg not found, creating stub.");
             writeStubFile(thumbDir + "/thumb_0001.jpg", "STUB_THUMBNAIL");
         }
 
@@ -149,16 +142,12 @@ public class VisualsStage {
             Process p2 = pb2.start();
             p2.getInputStream().transferTo(java.io.OutputStream.nullOutputStream());
             p2.waitFor();
-            System.out.println("✓ sprite_map.jpg saved");
+            System.out.println("sprite_map.jpg saved");
         } catch (Exception e) {
-            System.out.println("⚠️  ffmpeg not found, creating stub.");
+            System.out.println(" ffmpeg not found, creating stub.");
             writeStubFile(spritePath, "STUB_SPRITE_MAP");
         }
     }
-
-    // ─────────────────────────────────────────────────────────────
-    // Helper — write a small text file as a stub placeholder
-    // ─────────────────────────────────────────────────────────────
 
     private void writeStubFile(String path, String content) throws IOException {
         Files.createDirectories(Path.of(path).getParent());

@@ -1,0 +1,47 @@
+{
+  "pipeline_version": "1.0",
+  "generated_at": "2026-04-18T22:48:11",
+  "output_dir": "movie_101",
+  "drm": {
+    "scheme": "AES-128",
+    "key_id": "stub-key-id-0000-ffff",
+    "license_server": "https://drm.stub.pipeline/license"
+  },
+  "assets": {
+    "video": [
+      "movie_101/video/h264/1080p_h264.mp4",
+      "movie_101/video/h264/4k_h264.mp4",
+      "movie_101/video/h264/720p_h264.mp4",
+      "movie_101/video/hevc/1080p_hevc.mkv",
+      "movie_101/video/hevc/4k_hevc.mkv",
+      "movie_101/video/hevc/720p_hevc.mkv",
+      "movie_101/video/vp9/1080p_vp9.webm",
+      "movie_101/video/vp9/4k_vp9.webm",
+      "movie_101/video/vp9/720p_vp9.webm"
+    ],
+    "images": [
+      "movie_101/images/sprite_map.jpg",
+      "movie_101/images/thumbnails/thumb_0001.jpg"
+    ],
+    "text": [
+      "movie_101/text/ro_translation.txt",
+      "movie_101/text/source_transcript.txt"
+    ],
+    "audio": [
+      "movie_101/audio/ro_dub_synthetic.aac"
+    ],
+    "metadata": [
+      "movie_101/metadata/compliance_report.json",
+      "movie_101/metadata/manifest.json",
+      "movie_101/metadata/scene_analysis.json"
+    ]
+  },
+  "summary": {
+    "video_files": 9,
+    "image_files": 2,
+    "text_files": 2,
+    "audio_files": 1,
+    "metadata_files": 3,
+    "total_files": 17
+  }
+}

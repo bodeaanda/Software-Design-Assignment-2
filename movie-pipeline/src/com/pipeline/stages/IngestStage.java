@@ -17,7 +17,7 @@ public class IngestStage {
     }
 
     public void run() throws Exception {
-        System.out.println("\n── Phase 1: INGEST ──────────────────────────────");
+        System.out.println("\nINGEST STAGE(^◕.◕^)");
 
         checkFileExists();
         String checksum = computeChecksum();
@@ -52,7 +52,6 @@ public class IngestStage {
         }
 
         String checksum = hex.toString();
-        System.out.println("✓");
         System.out.println("  [Integrity Check] Checksum: " + checksum.substring(0, 16) + "...");
         return checksum;
     }
@@ -80,7 +79,6 @@ public class IngestStage {
         }
 
         double sizeMB = sizeBytes / (1024.0 * 1024.0);
-        System.out.println("✓");
         System.out.printf("  [Format Validator] Extension: %s | Size: %.2f MB%n", ext, sizeMB);
     }
 }

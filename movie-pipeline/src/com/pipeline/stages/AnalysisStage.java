@@ -14,7 +14,7 @@ public class AnalysisStage {
     }
 
     public void run() throws Exception {
-        System.out.println("\n── Phase 2: ANALYSIS ────────────────────────────");
+        System.out.println("\nANALYSIS STAGE(^◕.◕^)─────────────────────────────");
 
         detectIntroOutro();
         detectCredits();
@@ -31,21 +31,18 @@ public class AnalysisStage {
     private void detectIntroOutro() throws InterruptedException {
         System.out.print("  [Intro/Outro Detector] Scanning for theme song boundaries... ");
         Thread.sleep(300); 
-        System.out.println("✓");
         System.out.println("  [Intro/Outro Detector] Intro ends at: 92s | Outro starts at: 5280s");
     }
 
     private void detectCredits() throws InterruptedException {
         System.out.print("  [Credit Roller] Detecting credit roll start... ");
         Thread.sleep(200);
-        System.out.println("✓");
         System.out.println("  [Credit Roller] Credits start at: 5400s");
     }
 
     private void indexScenes() throws InterruptedException {
         System.out.print("  [Scene Indexer] Classifying scene segments... ");
         Thread.sleep(300);
-        System.out.println("✓");
 
         String[][] scenes = {
             {"0",    "92",   "intro"},
@@ -89,8 +86,6 @@ public class AnalysisStage {
         if (exitCode != 0) {
             throw new RuntimeException("ffprobe failed with exit code: " + exitCode);
         }
-
-        System.out.println("✓");
 
         String metaDir = outputDir + "/metadata";
         Files.createDirectories(Path.of(metaDir));

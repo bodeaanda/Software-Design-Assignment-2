@@ -1,0 +1,10 @@
+{
+  "safety_scan": {
+    "status": "completed",
+    "flagged_segments": [
+      { "start": "00:12:34", "end": "00:12:41", "region": "DE", "reason": "violence" },
+      { "start": "00:45:10", "end": "00:45:18", "region": "AU", "reason": "language" },
+      { "start": "01:02:05", "end": "01:02:09", "region": "SG", "reason": "nudity" }
+    ]
+  }
+}

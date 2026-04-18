@@ -4,6 +4,8 @@ import com.pipeline.stages.IngestStage;
 import com.pipeline.stages.AnalysisStage;
 import com.pipeline.stages.VisualsStage;
 import com.pipeline.stages.AudioTextStage;
+import com.pipeline.stages.ComplianceStage;
+import com.pipeline.stages.PackagingStage;
 
 public class Orchestrator {
 
@@ -19,9 +21,11 @@ public class Orchestrator {
 
     private void transition(PipelineState newState) {
         System.out.println();
+        System.out.println("==================================================");
         System.out.printf("  STATE: %-12s ->  %s%n", state, newState);
+        System.out.println("==================================================");
         this.state = newState;
-    }
+    } 
 
     public void run() {
         try {
@@ -64,6 +68,14 @@ public class Orchestrator {
             for (String error : errors) {
                 if (error != null) throw new RuntimeException(error);
             }
+
+            // Compliance Stage
+            transition(PipelineState.COMPLIANCE);
+            new ComplianceStage(outputDir).run();
+
+            // Packaging Stage
+            transition(PipelineState.PACKAGING);
+            new PackagingStage(outputDir).run();
 
             transition(PipelineState.DONE);
             System.out.println("\n Pipeline completed successfully!");

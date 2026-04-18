@@ -1,8 +1,11 @@
-00:00:00 --> 00:00:05
-Bun venit în lumea de mâine.
+00:00:00 -> 00:00:02
+Responabilitățile mele...
 
-00:00:06 --> 00:00:12
-Acesta este un transcript generat de pipeline.
+00:00:03 -> 00:00:04
+Despre ce vorbești?
 
-00:00:13 --> 00:00:20
-Într-un sistem real, s-ar folosi un model de recunoaștere a vorbirii.
+00:00:05 -> 00:00:08
+Ai avut vreodată un singur moment să te gândești la responsabilitățile mele?
+
+00:00:09 -> 00:00:11
+Te-ai gândit vreodată la responsabilitățile mele?
