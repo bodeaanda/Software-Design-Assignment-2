@@ -20,6 +20,9 @@ public class Orchestrator {
 
     public void run() {
         try {
+            transition(PipelineState.INGESTING);
+            new IngestStage(inputFile).run();
+
             transition(PipelineState.DONE);
             System.out.println("Pipeline completed successfully.");
         } catch (Exception e) {
