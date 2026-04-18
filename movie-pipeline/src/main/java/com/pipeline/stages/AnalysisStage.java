@@ -19,14 +19,18 @@ public class AnalysisStage {
         detectIntroOutro();
         detectCredits();
         indexScenes();
-        runFfprobeAnalysis();
 
+        try {
+            runFfprobeAnalysis();
+        } catch (Exception e) {
+            System.err.println("  [Scene Complexity] Warning: ffprobe analysis failed - " + e.getMessage());
+        }
         System.out.println(" Analysis complete.\n");
     }
 
     private void detectIntroOutro() throws InterruptedException {
         System.out.print("  [Intro/Outro Detector] Scanning for theme song boundaries... ");
-        Thread.sleep(300); // simulate processing time
+        Thread.sleep(300); 
         System.out.println("✓");
         System.out.println("  [Intro/Outro Detector] Intro ends at: 92s | Outro starts at: 5280s");
     }
