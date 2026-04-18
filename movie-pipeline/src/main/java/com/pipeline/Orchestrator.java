@@ -2,6 +2,9 @@ package main.java.com.pipeline;
 
 import java.nio.channels.Pipe;
 
+import main.java.com.pipeline.stages.IngestStage;
+import main.java.com.pipeline.stages.AnalysisStage;
+
 public class Orchestrator {
     private final String inputFile;
     private final String outputDir;
@@ -20,8 +23,13 @@ public class Orchestrator {
 
     public void run() {
         try {
+            //Ingest Stage
             transition(PipelineState.INGESTING);
             new IngestStage(inputFile).run();
+
+            //Analysis Stage
+            transition(PipelineState.ANALYZING);
+            new AnalysisStage(inputFile, outputDir).run();
 
             transition(PipelineState.DONE);
             System.out.println("Pipeline completed successfully.");
