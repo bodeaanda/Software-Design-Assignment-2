@@ -68,7 +68,7 @@ public class VisualsStage {
                     System.out.println("(" + sizeKb + " KB)");
                     count++;
                 } catch (Exception e) {
-                    System.out.println(" ffmpeg not found, creating stub file.");
+                    System.out.println(" ffmpeg error!");
                     writeStubFile(outPath, "STUB_VIDEO " + codecLabel + " " + resLabel);
                     count++;
                 }
@@ -82,7 +82,7 @@ public class VisualsStage {
             throws IOException, InterruptedException {
 
         java.util.List<String> cmd = new java.util.ArrayList<>();
-        cmd.add("ffmpeg");
+        cmd.add("C:\\Users\\Anda\\Desktop\\An III\\Sem II\\SD\\Assignment2\\movie-pipeline\\ffmpeg.exe");
         cmd.add("-y");
         cmd.add("-i");       cmd.add(inputFile);
         cmd.add("-vf");      cmd.add("scale=" + scale);
@@ -92,18 +92,23 @@ public class VisualsStage {
             cmd.add(arg);
         }
 
-        cmd.add("-acodec"); cmd.add("aac");
+        if (vcodec.equals("libvpx-vp9")) {
+            cmd.add("-acodec"); cmd.add("libopus");
+        } else {
+            cmd.add("-acodec"); cmd.add("aac");
+        }
+
         cmd.add(outPath);
 
         ProcessBuilder pb = new ProcessBuilder(cmd);
         pb.redirectErrorStream(true);
         Process process = pb.start();
 
-        process.getInputStream().transferTo(java.io.OutputStream.nullOutputStream());
+        String errorOutput = new String(process.getInputStream().readAllBytes());
         int exitCode = process.waitFor();
 
         if (exitCode != 0) {
-            throw new RuntimeException("ffmpeg exited with code " + exitCode);
+           throw new RuntimeException("ffmpeg exited with code " + exitCode + ": " + errorOutput);
         }
     }
 

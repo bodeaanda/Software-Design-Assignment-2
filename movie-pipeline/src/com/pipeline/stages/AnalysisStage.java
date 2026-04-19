@@ -67,7 +67,7 @@ public class AnalysisStage {
         System.out.println("  [Scene Complexity] Running ffprobe... ");
 
         ProcessBuilder pb = new ProcessBuilder(
-            "ffprobe",
+            "C:\\Users\\Anda\\Desktop\\An III\\Sem II\\SD\\Assignment2\\movie-pipeline\\ffprobe.exe",
             "-v", "quiet",
             "-print_format", "json",
             "-show_streams",
