@@ -3,6 +3,9 @@ package com.pipeline.stages;
 import java.io.*;
 import java.nio.file.*;
 
+// Safety Scnner -> detecteaza continut care trebuie cenzurat in anumite contexte
+// Regional Branding -> adauga logo-ul corect in funtie de tara
+
 public class ComplianceStage {
 
     private final String outputDir;
@@ -12,7 +15,7 @@ public class ComplianceStage {
     }
 
     public void run() throws Exception {
-        System.out.println("\nCOMPLIANCE STAGE(^◕.◕^)─────────────────────────────");
+        System.out.println("\n--COMPLIANCE STAGE--");
 
         runSafetyScanner();
         applyRegionalBranding();
@@ -21,7 +24,7 @@ public class ComplianceStage {
     }
 
     private void runSafetyScanner() throws IOException, InterruptedException {
-        System.out.print("  [Safety Scanner] Scanning content for regional restrictions... ");
+        System.out.println("  [Safety Scanner] Scanning content for regional restrictions... ");
         Thread.sleep(500);
 
         String[][] flaggedRegions = {
@@ -32,7 +35,7 @@ public class ComplianceStage {
 
         System.out.println("  [Safety Scanner] Flagged segments:");
         for (String[] flag : flaggedRegions) {
-            System.out.printf("    %s → %s  [region: %s, reason: %s]%n",
+            System.out.printf("    %s -> %s  [region: %s, reason: %s]%n",
                 flag[0], flag[1], flag[2], flag[3]);
         }
 
@@ -57,11 +60,11 @@ public class ComplianceStage {
             fw.write("}\n");
         }
 
-        System.out.println("  [Safety Scanner] compliance_report.json saved → " + reportPath);
+        System.out.println("  [Safety Scanner] compliance_report.json saved -> " + reportPath);
     }
 
     private void applyRegionalBranding() throws InterruptedException {
-        System.out.print("  [Regional Branding] Applying studio logos... ");
+        System.out.println("  [Regional Branding] Applying studio logos... ");
         Thread.sleep(400);
 
         String[][] brandingRules = {
@@ -73,7 +76,7 @@ public class ComplianceStage {
 
         System.out.println("  [Regional Branding] Branding applied:");
         for (String[] rule : brandingRules) {
-            System.out.printf("    Region %-4s → %s%n", rule[0], rule[1]);
+            System.out.printf("    Region %-4s -> %s%n", rule[0], rule[1]);
         }
     }
 }

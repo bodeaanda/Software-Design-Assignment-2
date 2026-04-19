@@ -38,7 +38,8 @@ public class Orchestrator {
             transition(PipelineState.ANALYZING);
             new AnalysisStage(inputFile, outputDir).run();
 
-            // Visuals + Audio/Text Stages (parallel)
+            // Visuals + Audio/Text Stages (parallel) 
+            System.out.println("\n  Starting Phase 3 + Phase 4 in parallel...");
             transition(PipelineState.PROCESSING);
 
             String[] errors = new String[2];
@@ -59,7 +60,6 @@ public class Orchestrator {
                 }
             });
 
-            System.out.println("\n  [Orchestrator] Starting Phase 3 + Phase 4 in parallel...");
             visualsThread.start();
             audioThread.start();
             visualsThread.join();

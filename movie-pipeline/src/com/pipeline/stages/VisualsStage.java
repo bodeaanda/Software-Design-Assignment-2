@@ -3,6 +3,10 @@ package com.pipeline.stages;
 import java.io.*;
 import java.nio.file.*;
 
+// Scene Complexity -> analizeaza cat de complexa e imaginea ca sa stie ce calitate sa foloseasca la encoding
+// Transcoder -> converteste filmul in mai multe rezolutii si formate pt. diferite dispozitive (telefon, PC, TV)
+// Sprite Generator -> extrage cadre din film si le lipeste intr-o imagine pentru bara de progres
+
 public class VisualsStage {
 
     private static final String[][] PROFILES = {
@@ -26,7 +30,7 @@ public class VisualsStage {
     }
 
     public void run() throws Exception {
-        System.out.println("\nVISUALS STAGE(^◕.◕^)");
+        System.out.println("\n--VISUALS STAGE--");
 
         transcode();
         generateSprites();
@@ -108,7 +112,7 @@ public class VisualsStage {
         String thumbDir = imgDir + "/thumbnails";
         Files.createDirectories(Path.of(thumbDir));
 
-        System.out.print("  [Sprite Generator] Extracting thumbnails... ");
+        System.out.println("  [Sprite Generator] Extracting thumbnails... ");
         try {
             String thumbPattern = thumbDir + "/thumb_%04d.jpg";
             ProcessBuilder pb = new ProcessBuilder(
@@ -127,9 +131,8 @@ public class VisualsStage {
             System.out.println(" ffmpeg not found, creating stub.");
             writeStubFile(thumbDir + "/thumb_0001.jpg", "STUB_THUMBNAIL");
         }
-
-        // Sprite map
-        System.out.print("  [Sprite Generator] Building sprite map... ");
+        
+        System.out.println("  [Sprite Generator] Building sprite map... ");
         String spritePath = imgDir + "/sprite_map.jpg";
         try {
             ProcessBuilder pb2 = new ProcessBuilder(

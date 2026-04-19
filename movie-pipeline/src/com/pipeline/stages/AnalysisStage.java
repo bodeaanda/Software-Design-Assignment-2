@@ -3,6 +3,10 @@ package com.pipeline.stages;
 import java.io.*;
 import java.nio.file.*;
 
+// Intro / Outro Detector -> gaseste unde se termina genericul de inceput si unde incepe cel de sfarsit
+// Credit Roller -> detecteaza cand incep creditele
+// Scene Indexer -> imparte filmul in segmente
+
 public class AnalysisStage {
 
     private final String inputFile;
@@ -14,7 +18,7 @@ public class AnalysisStage {
     }
 
     public void run() throws Exception {
-        System.out.println("\nANALYSIS STAGE(^◕.◕^)─────────────────────────────");
+        System.out.println("\n--ANALYSIS STAGE--");
 
         detectIntroOutro();
         detectCredits();
@@ -29,19 +33,19 @@ public class AnalysisStage {
     }
 
     private void detectIntroOutro() throws InterruptedException {
-        System.out.print("  [Intro/Outro Detector] Scanning for theme song boundaries... ");
+        System.out.println("  [Intro/Outro Detector] Scanning for theme song boundaries... ");
         Thread.sleep(300); 
         System.out.println("  [Intro/Outro Detector] Intro ends at: 92s | Outro starts at: 5280s");
     }
 
     private void detectCredits() throws InterruptedException {
-        System.out.print("  [Credit Roller] Detecting credit roll start... ");
+        System.out.println("  [Credit Roller] Detecting credit roll start... ");
         Thread.sleep(200);
         System.out.println("  [Credit Roller] Credits start at: 5400s");
     }
 
     private void indexScenes() throws InterruptedException {
-        System.out.print("  [Scene Indexer] Classifying scene segments... ");
+        System.out.println("  [Scene Indexer] Classifying scene segments... ");
         Thread.sleep(300);
 
         String[][] scenes = {
@@ -55,12 +59,12 @@ public class AnalysisStage {
 
         System.out.println("  [Scene Indexer] Indexed " + scenes.length + " segments:");
         for (String[] scene : scenes) {
-            System.out.printf("    %4ss → %4ss  [%s]%n", scene[0], scene[1], scene[2]);
+            System.out.printf("    %4ss -> %4ss  [%s]%n", scene[0], scene[1], scene[2]);
         }
     }
 
     private void runFfprobeAnalysis() throws Exception {
-        System.out.print("  [Scene Complexity] Running ffprobe... ");
+        System.out.println("  [Scene Complexity] Running ffprobe... ");
 
         ProcessBuilder pb = new ProcessBuilder(
             "ffprobe",
@@ -95,6 +99,6 @@ public class AnalysisStage {
             writer.write(output.toString());
         }
 
-        System.out.println("  [Scene Complexity] scene_analysis.json saved → " + outPath);
+        System.out.println("  [Scene Complexity] scene_analysis.json saved -> " + outPath);
     }
 }

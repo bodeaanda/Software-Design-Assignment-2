@@ -3,6 +3,10 @@ package com.pipeline.stages;
 import java.io.*;
 import java.nio.file.*;
 
+// Speech-to-Text -> transcrie tot ce se vb. in film intr-un text
+// Translator -> traduce transcriptul in romana
+// AI Dubber -> genereaza un dublaj sintetic in limba romana
+
 public class AudioTextStage {
 
     private final String inputFile;
@@ -14,7 +18,7 @@ public class AudioTextStage {
     }
 
     public void run() throws Exception {
-        System.out.println("\nAUDIO / TEXT STAGE(^◕.◕^)─────────────────────────────");
+        System.out.println("\nAUDIO / TEXT STAGE");
 
         String transcript   = speechToText();
         String translation  = translate(transcript);
@@ -24,7 +28,7 @@ public class AudioTextStage {
     }
 
     private String speechToText() throws IOException, InterruptedException {
-        System.out.print("  [Speech-to-Text] Transcribing audio... ");
+        System.out.println("  [Speech-to-Text] Transcribing audio... ");
         Thread.sleep(500);
 
         String transcript =
@@ -44,12 +48,12 @@ public class AudioTextStage {
             fw.write(transcript);
         }
 
-        System.out.println("  [Speech-to-Text] source_transcript.txt saved → " + outPath);
+        System.out.println("  [Speech-to-Text] source_transcript.txt saved -> " + outPath);
         return transcript;
     }
 
     private String translate(String transcript) throws IOException, InterruptedException {
-        System.out.print("  [Translator] Translating to Romanian (ro)... ");
+        System.out.println("  [Translator] Translating to Romanian (ro)... ");
         Thread.sleep(400);
 
         String translation =
@@ -67,21 +71,21 @@ public class AudioTextStage {
             fw.write(translation);
         }
 
-        System.out.println("  [Translator] ro_translation.txt saved → " + outPath);
+        System.out.println("  [Translator] ro_translation.txt saved -> " + outPath);
         return translation;
     }
 
     private void generateDub(String translation) throws IOException, InterruptedException {
-        System.out.print("  [AI Dubber] Generating synthetic Romanian dub... ");
+        System.out.println("  [AI Dubber] Generating synthetic Romanian dub... ");
         Thread.sleep(600);
 
         String audioDir = outputDir + "/audio";
         Files.createDirectories(Path.of(audioDir));
         String outPath = audioDir + "/ro_dub_synthetic.aac";
         try (FileWriter fw = new FileWriter(outPath)) {
-            fw.write("STUB_AAC_DUB — ro\n");
+            fw.write("STUB_AAC_DUB - ro\n");
         }
 
-        System.out.println("  [AI Dubber] ro_dub_synthetic.aac saved → " + outPath);
+        System.out.println("  [AI Dubber] ro_dub_synthetic.aac saved -> " + outPath);
     }
 }

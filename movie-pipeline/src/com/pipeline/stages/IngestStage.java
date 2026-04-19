@@ -4,6 +4,9 @@ import java.io.*;
 import java.nio.file.*;
 import java.security.*;
 import java.util.*;
+ 
+// Integrity Check -> verifica ca fisierul sa nu fie corupt (calc. SHA-256 a fisierului)
+// Format Validator -> verifica ca e un format acceptat si nu e prea mic
 
 public class IngestStage {
 
@@ -17,13 +20,13 @@ public class IngestStage {
     }
 
     public void run() throws Exception {
-        System.out.println("\nINGEST STAGE(^◕.◕^)");
+        System.out.println("\n--INGEST STAGE--");
 
         checkFileExists();
         String checksum = computeChecksum();
         validateFormat(checksum);
 
-        System.out.println(" Ingest complete — file is valid.\n");
+        System.out.println(" Ingest complete - file is valid.\n");
     }
 
     private void checkFileExists() throws IOException {
@@ -35,7 +38,7 @@ public class IngestStage {
     }
 
     private String computeChecksum() throws IOException, NoSuchAlgorithmException {
-        System.out.print("  [Integrity Check] Computing SHA-256 checksum... ");
+        System.out.println("  [Integrity Check] Computing SHA-256 checksum... ");
 
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         try (FileInputStream fis = new FileInputStream(inputFile)) {
@@ -57,7 +60,7 @@ public class IngestStage {
     }
 
     private void validateFormat(String checksum) throws IOException {
-        System.out.print("  [Format Validator] Checking file format... ");
+        System.out.println("  [Format Validator] Checking file format... ");
 
         String ext = "";
         int dot = inputFile.lastIndexOf('.');

@@ -6,6 +6,9 @@ import java.time.*;
 import java.time.format.*;
 import java.util.*;
 
+// DRM Wrapper -> cripteaza toate fisierele ca sa nu poata fi descarcate ilegal
+// Manifest Builder -> creeaza un fisier .json cu lista tuturor fisierelor generate
+
 public class PackagingStage {
 
     private final String outputDir;
@@ -15,7 +18,7 @@ public class PackagingStage {
     }
 
     public void run() throws Exception {
-        System.out.println("\nPACKAGING STAGE(^◕.◕^)");
+        System.out.println("\n--PACKAGING STAGE--");
 
         applyDrm();
         buildManifest();
@@ -24,7 +27,7 @@ public class PackagingStage {
     }
 
     private void applyDrm() throws InterruptedException {
-        System.out.print("  [DRM Wrapper] Encrypting streamable assets... ");
+        System.out.println("  [DRM Wrapper] Encrypting streamable assets... ");
         Thread.sleep(600);
         System.out.println("  [DRM Wrapper] Encryption scheme : AES-128 (stub)");
         System.out.println("  [DRM Wrapper] Key ID            : stub-key-id-0000-ffff");
@@ -32,7 +35,7 @@ public class PackagingStage {
     }
 
     private void buildManifest() throws IOException {
-        System.out.print("  [Manifest Builder] Scanning output and building manifest... ");
+        System.out.println("  [Manifest Builder] Scanning output and building manifest... ");
 
         List<String> videoFiles = collectFiles(outputDir + "/video");
         List<String> imageFiles = collectFiles(outputDir + "/images");
@@ -80,7 +83,7 @@ public class PackagingStage {
             fw.write(json.toString());
         }
 
-        System.out.println("  [Manifest Builder] manifest.json saved → " + manifestPath);
+        System.out.println("  [Manifest Builder] manifest.json saved -> " + manifestPath);
 
         int total = videoFiles.size() + imageFiles.size() + textFiles.size() +
                     audioFiles.size() + metaFiles.size();

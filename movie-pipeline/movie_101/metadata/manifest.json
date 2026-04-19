@@ -1,6 +1,6 @@
 {
   "pipeline_version": "1.0",
-  "generated_at": "2026-04-18T22:48:11",
+  "generated_at": "2026-04-19T13:26:25",
   "output_dir": "movie_101",
   "drm": {
     "scheme": "AES-128",
@@ -32,7 +32,6 @@
     ],
     "metadata": [
       "movie_101/metadata/compliance_report.json",
-      "movie_101/metadata/manifest.json",
       "movie_101/metadata/scene_analysis.json"
     ]
   },
@@ -41,7 +40,7 @@
     "image_files": 2,
     "text_files": 2,
     "audio_files": 1,
-    "metadata_files": 3,
-    "total_files": 17
+    "metadata_files": 2,
+    "total_files": 16
   }
 }
